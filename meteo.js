@@ -42,17 +42,37 @@ checkPreference();
 
 
 
-function checkArray(){
+async function checkArray(){
 //checks if localStorage has a "cities" item
   if (typeof(Storage) !== "undefined") {
     //if there is an item with the "preference" key and it has the value true...
     if(localStorage.getItem("cities") == null){
       //if there is no array...make a default and store it
+     /* if (navigator.geolocation) {
+        //if coordinates are accessible use the makeArray function
+        navigator.geolocation.getCurrentPosition(makeArray);
+      } else { */
       var array = ["rome", "berlin", "paris", "los angeles", "london", "tokyo", "beijing"];
       localStorage.setItem("cities", JSON.stringify(array));
+    //  }
     }
   }
 }
+/*
+ async function makeArray(position){
+        var lat = position.coords.latitude;
+        var lon = position.coords.longitude;
+        const APIkey = "d42f0d997cad9e6b3c98f3bf5e7a6667";
+        var response = await fetch("http://api.openweathermap.org/geo/1.0/reverse?lat="+lat+"&lon="+lon+"&appid="+APIkey,{method:"GET"});
+        //console.log(response);
+        var responseObj = response.json();
+        //console.log(responseObj[0]);
+        cityName = responseObj[0].local_names.en;
+        var array = [cityName, "berlin", "paris", "los angeles", "london", "tokyo", "beijing"];
+        localStorage.setItem("cities", JSON.stringify(array));
+ }
+*/
+
 checkArray();
 
 function changeArray(index, cityName){
